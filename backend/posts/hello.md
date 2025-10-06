@@ -1,2 +1,6 @@
-# Hello 
-Ini adalah blog pertama saya 🎯
+# Blog pertama
+haloo maaf gugup
+
+```python
+print("hello world")
+```
