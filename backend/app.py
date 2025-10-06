@@ -1,8 +1,11 @@
-from flask import Flask, jsonify, send_from_directory
+from flask import Flask, jsonify
+from flask_cors import CORS
 import markdown
 import os
 
 app = Flask(__name__)
+CORS(app)
+
 POST_DIR = "posts"
 
 @app.route("/posts")
