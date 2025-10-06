@@ -1,48 +1,31 @@
 <template>
-  <div>
-    <h1>Daftar Post</h1>
-    <ul>
-      <li v-for="post in posts" :key="post">
-        <a href="#" @click.prevent="loadPost(post)">{{ post }}</a>
-      </li>
-    </ul>
-
-    <hr />
-
-    <!-- Render konten HTML -->
-    <div v-if="currentPost.content" v-html="currentPost.content"></div>
+  <div class="max-w-3xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-4">My Blog</h1>
+    <PostList :posts="posts" @select="loadPost" />
+    <hr class="my-6" />
+    <PostContent :post="currentPost" />
   </div>
 </template>
 
 <script>
-import axios from "axios"
+import axios from 'axios'
+import PostList from './components/PostList.vue'
+import PostContent from './components/PostContent.vue'
 
 export default {
+  components: { PostList, PostContent },
   data() {
-    return {
-      posts: [],
-      currentPost: {}
-    }
+    return { posts: [], currentPost: {} }
   },
   async mounted() {
-    try {
-      const res = await axios.get("http://127.0.0.1:5000/posts")
-      this.posts = res.data
-      if (this.posts.length > 0) {
-        this.loadPost(this.posts[0]) // otomatis load post pertama
-      }
-    } catch (err) {
-      console.error("Gagal fetch daftar post:", err)
-    }
+    const res = await axios.get("http://127.0.0.1:5000/posts")
+    this.posts = res.data
+    if (this.posts.length > 0) this.loadPost(this.posts[0])
   },
   methods: {
     async loadPost(name) {
-      try {
-        const res = await axios.get(`http://127.0.0.1:5000/posts/${name}`)
-        this.currentPost = res.data
-      } catch (err) {
-        console.error("Gagal fetch post:", err)
-      }
+      const res = await axios.get(`http://127.0.0.1:5000/posts/${name}`)
+      this.currentPost = res.data
     }
   }
 }
