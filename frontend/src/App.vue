@@ -1,5 +1,6 @@
 <template>
   <div class="max-w-3xl mx-auto p-6">
+  <h1 class="text-3xl font-bold text-blue-600">Hello Tailwind v3 🚀</h1>
     <h1 class="text-3xl font-bold mb-4">My Blog</h1>
     <PostList :posts="posts" @select="loadPost" />
     <hr class="my-6" />
